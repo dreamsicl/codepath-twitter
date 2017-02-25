@@ -10,6 +10,8 @@
 		021F46A7CE11899AC3D07BC2 /* Pods_Warble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84766DCBBE702BDC5CD313E5 /* Pods_Warble.framework */; };
 		C59728E61E62007500021B10 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59728E51E62007500021B10 /* User.swift */; };
 		C59728E81E62008700021B10 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59728E71E62008700021B10 /* Tweet.swift */; };
+		C59728EA1E6205C200021B10 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59728E91E6205C200021B10 /* TwitterClient.swift */; };
+		C59728EC1E620F1200021B10 /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59728EB1E620F1200021B10 /* TweetsViewController.swift */; };
 		C5D4DF821E61D6D900C40D00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D4DF811E61D6D900C40D00 /* AppDelegate.swift */; };
 		C5D4DF871E61D6D900C40D00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5D4DF851E61D6D900C40D00 /* Main.storyboard */; };
 		C5D4DF891E61D6D900C40D00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5D4DF881E61D6D900C40D00 /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 		9E80F56CA0DBDDF916339D60 /* Pods-Warble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Warble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Warble/Pods-Warble.release.xcconfig"; sourceTree = "<group>"; };
 		C59728E51E62007500021B10 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C59728E71E62008700021B10 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		C59728E91E6205C200021B10 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
+		C59728EB1E620F1200021B10 /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
 		C5D4DF7E1E61D6D800C40D00 /* Warble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Warble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5D4DF811E61D6D900C40D00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5D4DF861E61D6D900C40D00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				C5EF9CBE1E61DA4000FA7018 /* LoginViewController.swift */,
+				C59728EB1E620F1200021B10 /* TweetsViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -63,6 +68,7 @@
 		C59728E31E62003400021B10 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				C59728E91E6205C200021B10 /* TwitterClient.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -241,7 +247,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C59728EA1E6205C200021B10 /* TwitterClient.swift in Sources */,
 				C5EF9CBF1E61DA4000FA7018 /* LoginViewController.swift in Sources */,
+				C59728EC1E620F1200021B10 /* TweetsViewController.swift in Sources */,
 				C5D4DF821E61D6D900C40D00 /* AppDelegate.swift in Sources */,
 				C59728E61E62007500021B10 /* User.swift in Sources */,
 				C59728E81E62008700021B10 /* Tweet.swift in Sources */,
