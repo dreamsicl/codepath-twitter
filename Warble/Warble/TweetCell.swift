@@ -15,7 +15,13 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screennameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
-    @IBOutlet weak var timestampLabel: UILabel!
+    @IBOutlet weak var timeAgoLabel: UILabel!
+    
+    @IBOutlet weak var replyImageView: UIImageView!
+    @IBOutlet weak var retweetImageView: UIImageView!
+    @IBOutlet weak var favoriteImageView: UIImageView!
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
     
     var tweet: Tweet! {
         didSet {
@@ -24,7 +30,24 @@ class TweetCell: UITableViewCell {
             tweetTextLabel.text = tweet.text
             profileImageView.setImageWith((tweet.user?.profileUrl)!)
             
-            timestampLabel.text = tweet.timeAgo
+            timeAgoLabel.text = tweet.timeAgo
+            
+            replyImageView.image = UIImage(named: "reply-icon")
+            retweetImageView.image = UIImage(named: "retweet-icon")
+            favoriteImageView.image = UIImage(named: "favor-icon")
+            
+            if tweet.rtCount > 0 {
+                retweetCountLabel.text = "\(tweet.rtCount)"
+            } else {
+                retweetCountLabel.text = ""
+            }
+            
+            if tweet.favCount > 0 {
+                favoriteCountLabel.text = "\(tweet.favCount)"
+            } else {
+                favoriteCountLabel.text = ""
+            }
+            
         }
     }
     

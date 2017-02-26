@@ -20,15 +20,26 @@ class Tweet: NSObject {
     var favCount: Int = 0
     var user: User?
     
+    var retweetedStatus: NSDictionary?
+    
     
     // 2. deserialize json
     init(dictionary: NSDictionary) {
+        retweetedStatus = dictionary["retweeted_status"] as? NSDictionary
+        
+        
         user = User(dictionary: dictionary["user"] as! NSDictionary)
         
         text = dictionary["text"] as? String
         
         rtCount = (dictionary["retweet_count"] as? Int) ?? 0
-        favCount = (dictionary["favourites_count"] as? Int) ?? 0
+        
+        if let retweetedStatus = retweetedStatus {
+            favCount = (retweetedStatus["favorite_count"] as? Int) ?? 0
+        } else {
+            favCount = (dictionary["favorite_count"] as? Int) ?? 0
+        }
+        
         
         let timestampString = dictionary["created_at"] as? String
         if let timestampString = timestampString {
