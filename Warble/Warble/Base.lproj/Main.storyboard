@@ -76,7 +76,16 @@
                             <constraint firstAttribute="trailing" secondItem="VLH-P4-WCQ" secondAttribute="trailing" id="umg-1A-KG8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cMu-1U-OOi"/>
+                    <navigationItem key="navigationItem" id="cMu-1U-OOi">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="vcp-yp-kcb">
+                            <connections>
+                                <action selector="onLogoutButton:" destination="k8h-hc-o3p" id="Naa-UH-jDZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="logoutButton" destination="vcp-yp-kcb" id="fXx-hk-mt0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wHb-7V-ofV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -85,7 +94,7 @@
         <!--Navigation Controller-->
         <scene sceneID="4rx-2l-bgJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="155-TB-728" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="tweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="155-TB-728" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WGM-Cu-3uF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

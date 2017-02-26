@@ -12,6 +12,8 @@ class TweetsViewController: UIViewController {
 
     var tweets: [Tweet]!
     
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +38,10 @@ class TweetsViewController: UIViewController {
     }
     
 
+    @IBAction func onLogoutButton(_ sender: Any) {
+        TwitterClient.sharedInstance.logout()
+        
+    }
     /*
     // MARK: - Navigation
 
