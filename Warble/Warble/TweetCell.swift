@@ -24,7 +24,7 @@ class TweetCell: UITableViewCell {
             tweetTextLabel.text = tweet.text
             profileImageView.setImageWith((tweet.user?.profileUrl)!)
             
-            timestampLabel.text = tweet.timeAgoString
+            timestampLabel.text = tweet.timeAgo
         }
     }
     

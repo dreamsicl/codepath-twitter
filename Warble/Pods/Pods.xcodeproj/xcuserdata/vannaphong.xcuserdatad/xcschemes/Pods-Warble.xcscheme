@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "948D33C1FCA74D2A0F444D75B17970BA"
+               BlueprintIdentifier = "A3A5ED07E856D8D07371F346FC9D76CC"
                BuildableName = "Pods_Warble.framework"
                BlueprintName = "Pods-Warble"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "948D33C1FCA74D2A0F444D75B17970BA"
+            BlueprintIdentifier = "A3A5ED07E856D8D07371F346FC9D76CC"
             BuildableName = "Pods_Warble.framework"
             BlueprintName = "Pods-Warble"
             ReferencedContainer = "container:Pods.xcodeproj">
