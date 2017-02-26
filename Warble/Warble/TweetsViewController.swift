@@ -63,8 +63,14 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.tweet = tweets[indexPath.row]
         
+        
+        
         return cell
     }
+    
+    
+    // MARK: - Actions on Tweets
+
     
     /*
     // MARK: - Navigation

@@ -17,9 +17,9 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var timeAgoLabel: UILabel!
     
-    @IBOutlet weak var replyImageView: UIImageView!
-    @IBOutlet weak var retweetImageView: UIImageView!
-    @IBOutlet weak var favoriteImageView: UIImageView!
+    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favoriteCountLabel: UILabel!
     
@@ -32,21 +32,9 @@ class TweetCell: UITableViewCell {
             
             timeAgoLabel.text = tweet.timeAgo
             
-            replyImageView.image = UIImage(named: "reply-icon")
-            retweetImageView.image = UIImage(named: "retweet-icon")
-            favoriteImageView.image = UIImage(named: "favor-icon")
+            retweetCountLabel.text = tweet.rtCountString
+            favoriteCountLabel.text = tweet.favCountString
             
-            if tweet.rtCount > 0 {
-                retweetCountLabel.text = "\(tweet.rtCount)"
-            } else {
-                retweetCountLabel.text = ""
-            }
-            
-            if tweet.favCount > 0 {
-                favoriteCountLabel.text = "\(tweet.favCount)"
-            } else {
-                favoriteCountLabel.text = ""
-            }
             
         }
     }
@@ -55,8 +43,8 @@ class TweetCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-//        print("\(tweet.user?.name)")
-//        print("\(tweet.user?.screenname)")
+        
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -64,5 +52,7 @@ class TweetCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    
 
 }

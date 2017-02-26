@@ -111,6 +111,19 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     
+    // MARK: - Actions on Tweets
+    
+    func retweetStatus(id: String, success: @escaping () -> (), failure: @escaping (Error) -> ()) {
+        post("/1.1/statuses/retweet/\(id).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            success()
+            
+        }) { (task: URLSessionDataTask?, error: Error) in
+            print("retweetStatus(): ERROR: \(error)")
+            failure(error)
+        }
+        
+    }
     
     
 }

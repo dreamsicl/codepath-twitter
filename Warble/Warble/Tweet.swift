@@ -11,13 +11,17 @@ import DateToolsSwift
 
 class Tweet: NSObject {
     // 1. enumerate properties
+    var id: String?
     var text: String?
     
     var timestamp: Date?
     var timeAgo: String?
     
     var rtCount: Int = 0
+    var rtCountString: String!
     var favCount: Int = 0
+    var favCountString: String!
+    
     var user: User?
     
     var retweetedStatus: NSDictionary?
@@ -27,11 +31,12 @@ class Tweet: NSObject {
     init(dictionary: NSDictionary) {
         retweetedStatus = dictionary["retweeted_status"] as? NSDictionary
         
-        
         user = User(dictionary: dictionary["user"] as! NSDictionary)
         
+        id = dictionary["id"] as? String
         text = dictionary["text"] as? String
         
+        /// rt/fav counts
         rtCount = (dictionary["retweet_count"] as? Int) ?? 0
         
         if let retweetedStatus = retweetedStatus {
@@ -40,6 +45,8 @@ class Tweet: NSObject {
             favCount = (dictionary["favorite_count"] as? Int) ?? 0
         }
         
+        rtCountString = (rtCount > 0) ? "\(rtCount)" : ""
+        favCountString = (favCount > 0) ? "\(favCount)" : ""
         
         let timestampString = dictionary["created_at"] as? String
         if let timestampString = timestampString {
@@ -67,5 +74,7 @@ class Tweet: NSObject {
         return tweets
         
     }
+    
+    
 
 }
