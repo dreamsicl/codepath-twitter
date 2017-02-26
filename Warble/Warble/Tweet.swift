@@ -32,6 +32,8 @@ class Tweet: NSObject {
     
     var retweetedStatus: NSDictionary?
     
+    var media: NSDictionary?
+    
     
     // 2. deserialize json
     init(dictionary: NSDictionary) {
@@ -68,6 +70,10 @@ class Tweet: NSObject {
             timeAgo = Date().shortTimeAgo(since: timestamp!)
             
         }
+        
+        // media
+        media = dictionary["media"] as? NSDictionary
+        print("\(media)")
     }
     
     class func tweetsFromArray(dictionaries: [NSDictionary]) -> [Tweet] {

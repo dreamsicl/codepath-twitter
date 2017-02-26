@@ -20,9 +20,9 @@ class User: NSObject {
     var json: NSDictionary?
     
     init(dictionary: NSDictionary) {
-//        print("\(dictionary)")
         self.json = dictionary
         
+        // author
         name = dictionary["name"] as? String
         screenname = dictionary["screen_name"] as? String
         

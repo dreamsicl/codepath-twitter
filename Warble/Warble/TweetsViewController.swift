@@ -8,9 +8,11 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
 
     var tweets: [Tweet]!
+    
+    var isMoreDataLoading = false
     
     @IBOutlet weak var replyImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
@@ -69,7 +71,23 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-    // MARK: - Actions on Tweets
+    // MARK: - Scroll View (Infinite Scroll)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (!self.isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = self.tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(self.tableView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
+                
+                isMoreDataLoading = true
+                
+                // Code to load more results
+//                loadMoreData()
+            }
+        }
+    }
 
     
     /*
