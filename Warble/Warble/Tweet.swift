@@ -19,8 +19,14 @@ class Tweet: NSObject {
     
     var rtCount: Int = 0
     var rtCountString: String!
-    var favCount: Int = 0
+    var retweeted: Bool = false
+    var favCount: Int = 0 {
+        didSet {
+            
+        }
+    }
     var favCountString: String!
+    var favorited: Bool = false
     
     var user: User?
     
@@ -48,6 +54,10 @@ class Tweet: NSObject {
         rtCountString = (rtCount > 0) ? "\(rtCount)" : ""
         favCountString = (favCount > 0) ? "\(favCount)" : ""
         
+        retweeted = dictionary["retweeted"] as! Bool
+        favorited = dictionary["favorited"] as! Bool
+        
+        // timestamps
         let timestampString = dictionary["created_at"] as? String
         if let timestampString = timestampString {
             

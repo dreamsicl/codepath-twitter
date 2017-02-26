@@ -35,6 +35,11 @@ class TweetCell: UITableViewCell {
             retweetCountLabel.text = tweet.rtCountString
             favoriteCountLabel.text = tweet.favCountString
             
+            if tweet.favorited {
+                favoriteButton.setImage(UIImage(named: "favor-icon-red") , for: .normal)
+            } else {
+                favoriteButton.setImage(UIImage(named: "favor-icon"), for: .normal)
+            }
             
         }
     }
@@ -53,6 +58,56 @@ class TweetCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    @IBAction func onRtButton(_ sender: Any) {
+        // locally toggle tweet rted state
+        self.tweet.retweeted = !self.tweet.retweeted
+        
+        // visually change button based on rted state
+        if self.tweet.retweeted {
+            retweetButton.setImage(UIImage(named: "retweet-icon-green") , for: .normal)
+            
+            self.tweet.rtCount += 1
+            
+        } else {
+            retweetButton.setImage(UIImage(named: "retweet-icon"), for: .normal)
+            
+            self.tweet.rtCount -= 1
+        }
+        
+        // update count string
+        self.tweet.rtCountString = (self.tweet.rtCount > 0) ? "\(self.tweet.rtCount)" : ""
+        self.retweetCountLabel.text = self.tweet.rtCountString
+        
+        // TODO: post to Twitter
+        
+    }
+    
+    @IBAction func onFavButton(_ sender: Any) {
+        // toggle tweet favorited state
+        self.tweet.favorited = !self.tweet.favorited
+        
+        // visually change button based on favorited state
+        if self.tweet.favorited {
+            favoriteButton.setImage(UIImage(named: "favor-icon-red") , for: .normal)
+            favoriteButton.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: -1.0, bottom: 0.0, right: 0.0)
+            
+            self.tweet.favCount += 1
+            
+        } else {
+            favoriteButton.setImage(UIImage(named: "favor-icon"), for: .normal)
+            favoriteButton.imageEdgeInsets = UIEdgeInsets(top: -4.0, left: 0.0, bottom: 0.0, right: 0.0)
+            
+            self.tweet.favCount -= 1
+            
+        }
+        
+        
+        self.tweet.favCountString = (self.tweet.favCount > 0) ? "\(self.tweet.favCount)" : ""
+        self.favoriteCountLabel.text = self.tweet.favCountString
+        
+        // TODO: post to Twitter
+    }
     
 
 }
