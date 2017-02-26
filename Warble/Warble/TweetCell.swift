@@ -25,10 +25,21 @@ class TweetCell: UITableViewCell {
     
     var tweet: Tweet! {
         didSet {
-            nameLabel.text = tweet.user?.name
-            screennameLabel.text = "@\((tweet.user?.screenname)! as String)"
-            tweetTextLabel.text = tweet.text
-            profileImageView.setImageWith((tweet.user?.profileUrl)!)
+            
+            // set main tweet view
+            if (tweet.retweetedStatus != nil) {
+                let rt = Tweet(dictionary: tweet.retweetedStatus!)
+                nameLabel.text = rt.user?.name
+                screennameLabel.text = "@\((rt.user?.screenname)! as String)"
+                tweetTextLabel.text = rt.text
+                profileImageView.setImageWith((rt.user?.profileUrl)!)
+                
+            } else {
+                nameLabel.text = tweet.user?.name
+                screennameLabel.text = "@\((tweet.user?.screenname)! as String)"
+                tweetTextLabel.text = tweet.text
+                profileImageView.setImageWith((tweet.user?.profileUrl)!)
+            }
             
             timeAgoLabel.text = tweet.timeAgo
             
