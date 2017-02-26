@@ -77,8 +77,8 @@ class TweetCell: UITableViewCell {
         // visually change button based on rted state
         if self.tweet.retweeted {
             retweetButton.setImage(UIImage(named: "retweet-icon-green") , for: .normal)
-            
             self.tweet.rtCount += 1
+            
             
         } else {
             retweetButton.setImage(UIImage(named: "retweet-icon"), for: .normal)
@@ -91,7 +91,9 @@ class TweetCell: UITableViewCell {
         self.retweetCountLabel.text = self.tweet.rtCountString
         
         // TODO: post to Twitter
-        
+        if let id = self.tweet.id {
+            TwitterClient.sharedInstance.retweetStatus(retweeting: self.tweet.retweeted, id: "\(id)")
+        }
     }
     
     @IBAction func onFavButton(_ sender: Any) {
@@ -118,6 +120,9 @@ class TweetCell: UITableViewCell {
         self.favoriteCountLabel.text = self.tweet.favCountString
         
         // TODO: post to Twitter
+        if let id = self.tweet.id {
+            TwitterClient.sharedInstance.favoriteStatus(favoriting: self.tweet.favorited, id: "\(id)")
+        }
     }
     
 

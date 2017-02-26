@@ -11,7 +11,7 @@ import DateToolsSwift
 
 class Tweet: NSObject {
     // 1. enumerate properties
-    var id: String?
+    var id: Int?
     var text: String?
     
     var timestamp: Date?
@@ -39,7 +39,7 @@ class Tweet: NSObject {
         
         user = User(dictionary: dictionary["user"] as! NSDictionary)
         
-        id = dictionary["id"] as? String
+        id = dictionary["id"] as? Int
         text = dictionary["text"] as? String
         
         /// rt/fav counts

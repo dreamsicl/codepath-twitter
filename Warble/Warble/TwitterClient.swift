@@ -17,6 +17,8 @@ class TwitterClient: BDBOAuth1SessionManager {
     var loginSuccess: (() -> ())?
     var loginFailure: ((Error) -> ())?
     
+    var postError: NSError?
+    
     
     func login(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
         
@@ -97,7 +99,6 @@ class TwitterClient: BDBOAuth1SessionManager {
             success: { (task: URLSessionDataTask, response: Any?) in
                 
                 let dictionaries = response as! [NSDictionary]
-//                print("\(response)")
                 
                 let tweets = Tweet.tweetsFromArray(dictionaries: dictionaries)
                 
@@ -113,16 +114,31 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     // MARK: - Actions on Tweets
     
-    func retweetStatus(id: String, success: @escaping () -> (), failure: @escaping (Error) -> ()) {
-        post("/1.1/statuses/retweet/\(id).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-            
-            success()
-            
-        }) { (task: URLSessionDataTask?, error: Error) in
-            print("retweetStatus(): ERROR: \(error)")
-            failure(error)
-        }
+    func retweetStatus(retweeting: Bool, id: String) {
         
+        let endpoint = retweeting ? "retweet" : "unretweet"
+        
+        post("1.1/statuses/\(endpoint)/\(id).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            print("retweetStatus(): \(endpoint): success")
+        },
+             failure: { (task: URLSessionDataTask?, error: Error) in
+            
+                print("retweetStatus(): ERROR: \(error)")
+        })
+        
+    }
+    
+    func favoriteStatus(favoriting: Bool, id: String) {
+        
+        let endpoint = favoriting ? "create" : "destroy"
+        
+        post("1.1/favorites/\(endpoint).json?id=\(id)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            print("favoriteStatus(): \(endpoint): success")
+        },
+             failure: { (task: URLSessionDataTask?, error: Error) in
+                
+                print("favoriteStatus(): ERROR: \(error)")
+        })
     }
     
     
