@@ -19,8 +19,8 @@ class User: NSObject {
     
     var json: NSDictionary?
     
-    
     init(dictionary: NSDictionary) {
+//        print("\(dictionary)")
         self.json = dictionary
         
         name = dictionary["name"] as? String

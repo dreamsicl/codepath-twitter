@@ -32,7 +32,9 @@ class TwitterClient: BDBOAuth1SessionManager {
             
             let url = URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\((requestToken?.token)! as String)")!
             
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url, options: [:], completionHandler: { (success: Bool) in
+                // do nothing
+            })
         }, failure: { (error: Error?) -> Void in
             print("login(): fetching request token: ERROR: \((error?.localizedDescription)! as String)")
         })
@@ -95,6 +97,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             success: { (task: URLSessionDataTask, response: Any?) in
                 
                 let dictionaries = response as! [NSDictionary]
+//                print("\(response)")
                 
                 let tweets = Tweet.tweetsFromArray(dictionaries: dictionaries)
                 

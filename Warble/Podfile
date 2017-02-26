@@ -6,7 +6,8 @@ target 'Warble' do
   use_frameworks!
 
   # Pods for Warble
-  pod ‘AFNetworking’
-  pod ‘BDBOAuth1Manager’
+  pod 'AFNetworking'
+  pod 'BDBOAuth1Manager'
+  pod 'DateToolsSwift'
 
 end

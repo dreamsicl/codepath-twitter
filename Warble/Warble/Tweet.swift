@@ -11,12 +11,19 @@ import UIKit
 class Tweet: NSObject {
     // 1. enumerate properties
     var text: String?
+    
     var timestamp: Date?
+    var timeAgo: Int!
+    var timeAgoString: String!
+    
     var rtCount: Int = 0
     var favCount: Int = 0
+    var user: User?
+    
     
     // 2. deserialize json
     init(dictionary: NSDictionary) {
+        user = User(dictionary: dictionary["user"] as! NSDictionary)
         
         text = dictionary["text"] as? String
         
@@ -28,8 +35,25 @@ class Tweet: NSObject {
             
             let formatter = DateFormatter()
             formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
-            
             timestamp = formatter.date(from: timestampString)
+            
+            // time ago in seconds
+            timeAgo = Int(Date().timeIntervalSince(timestamp!))
+            if timeAgo > 60 { // greater than 1 minute ago
+                timeAgo = timeAgo / 60
+                timeAgoString = "\(timeAgo)s ago"
+                
+                
+                if timeAgo! > 60 { // greater than 1 hour ago
+                    timeAgo = timeAgo! / 60
+                    timeAgoString = "\(timeAgo)m ago"
+                    
+                    if timeAgo! > 24 { // greater than 1 day ago
+                        timeAgo = timeAgo! / 24
+                        timeAgoString = "\(timeAgo)d ago"
+                    }
+                }
+            }
         }
     }
     
