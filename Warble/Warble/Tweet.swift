@@ -73,7 +73,7 @@ class Tweet: NSObject {
         
         // media
         media = dictionary["media"] as? NSDictionary
-        print("\(media)")
+        print("\(id)")
     }
     
     class func tweetsFromArray(dictionaries: [NSDictionary]) -> [Tweet] {

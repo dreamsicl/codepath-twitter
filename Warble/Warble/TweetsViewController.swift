@@ -13,6 +13,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var tweets: [Tweet]!
     
     var isMoreDataLoading = false
+    var loadingMoreView: InfiniteScrollActivityView?
     
     @IBOutlet weak var replyImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
@@ -28,7 +29,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         // get tweets from home timeline to display in table
-        TwitterClient.sharedInstance.homeTimeline(success: { (tweets: [Tweet]) in
+        TwitterClient.sharedInstance.homeTimeline(max_id: "0", success: { (tweets: [Tweet]) in
         
             self.tweets = tweets
             self.tableView.reloadData()
@@ -37,6 +38,16 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print("\(error.localizedDescription as String)")
         }
 
+        // Set up Infinite Scroll loading indicator
+        let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
+        loadingMoreView = InfiniteScrollActivityView(frame: frame)
+        loadingMoreView!.isHidden = true
+        tableView.addSubview(loadingMoreView!)
+        
+        var insets = tableView.contentInset
+        insets.bottom += InfiniteScrollActivityView.defaultHeight
+        tableView.contentInset = insets
+        
         // Do any additional setup after loading the view.
     }
 
@@ -72,6 +83,20 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     // MARK: - Scroll View (Infinite Scroll)
+    func loadMoreHomeTimeline(max_id: String) {
+        
+        TwitterClient.sharedInstance.homeTimeline(max_id: max_id, success: { (moreTweets: [Tweet]) in
+            
+            self.isMoreDataLoading = false
+            self.tweets = self.tweets + moreTweets
+            self.tableView.reloadData()
+            
+        }) { (error: Error) in
+            
+        }
+    }
+    
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (!self.isMoreDataLoading) {
             // Calculate the position of one screen length before the bottom of the results
@@ -81,11 +106,53 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             // When the user has scrolled past the threshold, start requesting
             if(self.tableView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
                 
+                // Update position of loadingMoreView, and start loading indicator
+                let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
+                loadingMoreView?.frame = frame
+                loadingMoreView!.startAnimating()
+                
                 isMoreDataLoading = true
                 
                 // Code to load more results
-//                loadMoreData()
+                let max_id = tweets[tweets.count - 1].id! - 1
+                loadMoreHomeTimeline(max_id: "\(max_id)")
             }
+        }
+    }
+    
+    class InfiniteScrollActivityView: UIView {
+        var activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
+        static let defaultHeight:CGFloat = 60.0
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+            setupActivityIndicator()
+        }
+        
+        override init(frame aRect: CGRect) {
+            super.init(frame: aRect)
+            setupActivityIndicator()
+        }
+        
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            activityIndicatorView.center = CGPoint(x: self.bounds.size.width/2, y: self.bounds.size.height/2)
+        }
+        
+        func setupActivityIndicator() {
+            activityIndicatorView.activityIndicatorViewStyle = .gray
+            activityIndicatorView.hidesWhenStopped = true
+            self.addSubview(activityIndicatorView)
+        }
+        
+        func stopAnimating() {
+            self.activityIndicatorView.stopAnimating()
+            self.isHidden = true
+        }
+        
+        func startAnimating() {
+            self.isHidden = false
+            self.activityIndicatorView.startAnimating()
         }
     }
 
