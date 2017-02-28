@@ -52,7 +52,7 @@
             </objects>
             <point key="canvasLocation" x="136.875" y="129.92957746478874"/>
         </scene>
-        <!--Tweets View Controller-->
+        <!--Home-->
         <scene sceneID="B39-co-Icg">
             <objects>
                 <viewController id="k8h-hc-o3p" customClass="TweetsViewController" customModule="Warble" customModuleProvider="target" sceneMemberID="viewController">
@@ -83,8 +83,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="lorem ipsum dolor sit amet lorem ipsum dolor sit amet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YbO-w1-5OH">
-                                                    <rect key="frame" x="64" y="28" width="207.5" height="77.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="64" y="28" width="228.5" height="74"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -123,7 +123,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IN0-XZ-Y7H" userLabel="Interaction View">
-                                                    <rect key="frame" x="64" y="109.5" width="248" height="24"/>
+                                                    <rect key="frame" x="8" y="110" width="304" height="24"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="450" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIh-AR-agM">
                                                             <rect key="frame" x="116" y="5" width="23" height="14.5"/>
@@ -132,7 +132,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="450" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSg-pz-XCW">
-                                                            <rect key="frame" x="202" y="5" width="23" height="14.5"/>
+                                                            <rect key="frame" x="206" y="5" width="23" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -157,7 +157,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZzD-6H-1mU">
-                                                            <rect key="frame" x="176" y="0.0" width="24" height="24"/>
+                                                            <rect key="frame" x="180" y="0.0" width="24" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="R76-2P-h3B"/>
                                                                 <constraint firstAttribute="width" constant="24" id="j0n-J6-gZm"/>
@@ -168,20 +168,34 @@
                                                                 <action selector="onFavButton:" destination="5Ec-Hf-AzI" eventType="touchUpInside" id="gha-3A-Emx"/>
                                                             </connections>
                                                         </button>
+                                                        <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pHH-vh-d1Y">
+                                                            <rect key="frame" x="272" y="0.0" width="24" height="24"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="24" id="Qo7-Tl-swd"/>
+                                                                <constraint firstAttribute="width" constant="24" id="jgH-aJ-1VY"/>
+                                                            </constraints>
+                                                            <inset key="contentEdgeInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
+                                                            <state key="normal" image="message-icon"/>
+                                                            <connections>
+                                                                <action selector="onFavButton:" destination="5Ec-Hf-AzI" eventType="touchUpInside" id="u7c-Ha-NAF"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="pHH-vh-d1Y" secondAttribute="trailing" constant="8" id="4dc-CQ-3LB"/>
                                                         <constraint firstItem="BqJ-i8-FHW" firstAttribute="leading" secondItem="ZnN-ZP-6QC" secondAttribute="trailing" constant="64" id="E62-YC-yLJ"/>
+                                                        <constraint firstItem="pHH-vh-d1Y" firstAttribute="centerY" secondItem="IN0-XZ-Y7H" secondAttribute="centerY" id="MVb-UW-72D"/>
                                                         <constraint firstItem="ZzD-6H-1mU" firstAttribute="top" secondItem="IN0-XZ-Y7H" secondAttribute="top" id="NAR-2J-eYw"/>
                                                         <constraint firstItem="CSg-pz-XCW" firstAttribute="centerY" secondItem="IN0-XZ-Y7H" secondAttribute="centerY" id="QIU-g3-8V1"/>
                                                         <constraint firstItem="ZnN-ZP-6QC" firstAttribute="top" secondItem="IN0-XZ-Y7H" secondAttribute="top" id="UWx-qq-vJM"/>
                                                         <constraint firstItem="CSg-pz-XCW" firstAttribute="leading" secondItem="ZzD-6H-1mU" secondAttribute="trailing" constant="2" id="Vg9-2q-HEK"/>
                                                         <constraint firstAttribute="height" constant="24" id="ics-0X-s5H"/>
                                                         <constraint firstItem="UIh-AR-agM" firstAttribute="leading" secondItem="BqJ-i8-FHW" secondAttribute="trailing" constant="4" id="jti-bD-nFe"/>
-                                                        <constraint firstAttribute="width" constant="248" id="miP-3p-gI6"/>
+                                                        <constraint firstAttribute="width" constant="304" id="miP-3p-gI6"/>
                                                         <constraint firstItem="UIh-AR-agM" firstAttribute="centerY" secondItem="IN0-XZ-Y7H" secondAttribute="centerY" id="nPA-Zz-u8l"/>
                                                         <constraint firstItem="BqJ-i8-FHW" firstAttribute="top" secondItem="IN0-XZ-Y7H" secondAttribute="top" id="uDx-4o-43s"/>
-                                                        <constraint firstItem="ZzD-6H-1mU" firstAttribute="leading" secondItem="BqJ-i8-FHW" secondAttribute="trailing" constant="64" id="wye-ab-H4r"/>
+                                                        <constraint firstItem="ZzD-6H-1mU" firstAttribute="leading" secondItem="BqJ-i8-FHW" secondAttribute="trailing" constant="68" id="wye-ab-H4r"/>
                                                         <constraint firstItem="ZnN-ZP-6QC" firstAttribute="leading" secondItem="IN0-XZ-Y7H" secondAttribute="leading" id="xoo-RV-TlV"/>
                                                     </constraints>
                                                 </view>
@@ -189,7 +203,8 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="YbO-w1-5OH" secondAttribute="trailing" constant="8" id="9jb-VX-i3A"/>
                                                 <constraint firstItem="YbO-w1-5OH" firstAttribute="top" secondItem="s63-2p-JXu" secondAttribute="bottom" id="CHP-Jr-rqT"/>
-                                                <constraint firstItem="IN0-XZ-Y7H" firstAttribute="top" secondItem="YbO-w1-5OH" secondAttribute="bottom" constant="4" id="KSE-Nb-dNE"/>
+                                                <constraint firstItem="IN0-XZ-Y7H" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OnE-dU-OrT" secondAttribute="bottom" constant="8" id="ILl-Vr-ZCc"/>
+                                                <constraint firstItem="IN0-XZ-Y7H" firstAttribute="top" secondItem="YbO-w1-5OH" secondAttribute="bottom" constant="8" id="KSE-Nb-dNE"/>
                                                 <constraint firstItem="s63-2p-JXu" firstAttribute="leading" secondItem="OnE-dU-OrT" secondAttribute="trailing" constant="8" id="XRA-9p-GEu"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="IN0-XZ-Y7H" secondAttribute="trailing" id="YW6-r6-JPY"/>
                                                 <constraint firstItem="IN0-XZ-Y7H" firstAttribute="bottom" secondItem="rOR-HG-1a6" secondAttribute="bottomMargin" id="atY-2o-2PR"/>
@@ -201,6 +216,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="dmButton" destination="pHH-vh-d1Y" id="ysa-iW-s6P"/>
                                             <outlet property="favoriteButton" destination="ZzD-6H-1mU" id="7fT-Yg-Tfd"/>
                                             <outlet property="favoriteCountLabel" destination="CSg-pz-XCW" id="L1H-rE-s9X"/>
                                             <outlet property="nameLabel" destination="17D-fx-pWX" id="vN7-ew-dLz"/>
@@ -228,7 +244,7 @@
                             <constraint firstItem="VLH-P4-WCQ" firstAttribute="leading" secondItem="Opz-OI-qc7" secondAttribute="leading" id="vMy-Tb-0fi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cMu-1U-OOi">
+                    <navigationItem key="navigationItem" title="Home" id="cMu-1U-OOi">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="vcp-yp-kcb">
                             <connections>
                                 <action selector="onLogoutButton:" destination="k8h-hc-o3p" id="Naa-UH-jDZ"/>
@@ -252,6 +268,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WGM-Cu-3uF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -265,6 +286,7 @@
     </scenes>
     <resources>
         <image name="favor-icon" width="30" height="30"/>
+        <image name="message-icon" width="30" height="30"/>
         <image name="reply-icon" width="30" height="30"/>
         <image name="retweet-icon" width="30" height="30"/>
     </resources>

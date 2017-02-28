@@ -48,6 +48,14 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         insets.bottom += InfiniteScrollActivityView.defaultHeight
         tableView.contentInset = insets
         
+        // Pull to refresh
+        // Initialize a UIRefreshControl
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        // add refresh control to table view
+        self.tableView.insertSubview(refreshControl, at: 0)
+        self.tableView.sendSubview(toBack: refreshControl)
+        
         // Do any additional setup after loading the view.
     }
 
@@ -82,7 +90,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-    // MARK: - Scroll View (Infinite Scroll)
+    // MARK: - Additional network calls (infinite scroll, pull to refresh)
     func loadMoreHomeTimeline(max_id: String) {
         
         TwitterClient.sharedInstance.homeTimeline(max_id: max_id, success: { (moreTweets: [Tweet]) in
@@ -156,7 +164,27 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
 
-    
+    // Makes a network request to get updated data
+    // Updates the tableView with the new data
+    // Hides the RefreshControl
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        
+        // load *new* tweets
+        let max_id = (tweets.first?.id)! + 1
+        
+        TwitterClient.sharedInstance.homeTimeline(max_id: "\(max_id)", success: { (newTweets: [Tweet]) in
+            
+            self.tweets.insert(contentsOf: newTweets, at: 0)
+            
+            self.tableView.reloadData()
+            refreshControl.endRefreshing()
+            
+        }) { (error: Error) in
+            
+            print("pullToRefresh(): ERROR: \(error)")
+        }
+        
+    }
     /*
     // MARK: - Navigation
 

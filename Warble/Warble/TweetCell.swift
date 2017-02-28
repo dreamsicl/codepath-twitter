@@ -22,6 +22,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favoriteCountLabel: UILabel!
+    @IBOutlet weak var dmButton: UIButton!
     
     var tweet: Tweet! {
         didSet {
@@ -40,6 +41,8 @@ class TweetCell: UITableViewCell {
                 tweetTextLabel.text = tweet.text
                 profileImageView.setImageWith((tweet.user?.profileUrl)!)
             }
+            profileImageView.layer.cornerRadius = 3
+            profileImageView.clipsToBounds = true
             
             timeAgoLabel.text = tweet.timeAgo
             
