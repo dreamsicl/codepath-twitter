@@ -50,9 +50,9 @@ class TweetCell: UITableViewCell {
             favoriteCountLabel.text = tweet.favCountString
             
             if tweet.favorited {
-                favoriteButton.setImage(UIImage(named: "favor-icon-red") , for: .normal)
+                favoriteButton.setTitleColor(Tweet.favoriteColor, for: .normal)
             } else {
-                favoriteButton.setImage(UIImage(named: "favor-icon"), for: .normal)
+                favoriteButton.setTitleColor(UIColor.lightGray, for: .normal)
             }
             
         }
@@ -61,8 +61,16 @@ class TweetCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        let fontSize = CGFloat(15)
         
+        replyButton.titleLabel?.font = UIFont.fontAwesome(ofSize: fontSize)
+        replyButton.setTitle(String.fontAwesomeIcon(name: .reply), for: .normal)
         
+        retweetButton.titleLabel?.font = UIFont.fontAwesome(ofSize: fontSize)
+        retweetButton.setTitle(String.fontAwesomeIcon(name: .retweet), for: .normal)
+        
+        favoriteButton.titleLabel?.font = UIFont.fontAwesome(ofSize: fontSize)
+        favoriteButton.setTitle(String.fontAwesomeIcon(name: .heart), for: .normal)
         
     }
 
@@ -77,15 +85,17 @@ class TweetCell: UITableViewCell {
         // locally toggle tweet rted state
         self.tweet.retweeted = !self.tweet.retweeted
         
+        
         // visually change button based on rted state
         if self.tweet.retweeted {
-//            retweetButton.setImage(UIImage(named: "retweet-icon-green") , for: .normal)
+            retweetButton.setTitleColor(Tweet.retweetColor, for: .normal)
+            retweetCountLabel.textColor = Tweet.retweetColor
             self.tweet.rtCount += 1
             
             
         } else {
-//            retweetButton.setImage(UIImage(named: "retweet-icon"), for: .normal)
-            
+            retweetButton.setTitleColor(UIColor.lightGray, for: .normal)
+            retweetCountLabel.textColor = UIColor.lightGray
             self.tweet.rtCount -= 1
         }
         
@@ -105,14 +115,16 @@ class TweetCell: UITableViewCell {
         
         // visually change button based on favorited state
         if self.tweet.favorited {
-            favoriteButton.setImage(UIImage(named: "favor-icon-red") , for: .normal)
-            favoriteButton.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: -1.0, bottom: 0.0, right: 0.0)
+            
+            favoriteButton.setTitleColor(Tweet.favoriteColor, for: .normal)
+            favoriteCountLabel.textColor = Tweet.favoriteColor
             
             self.tweet.favCount += 1
             
         } else {
-            favoriteButton.setImage(UIImage(named: "favor-icon"), for: .normal)
-            favoriteButton.imageEdgeInsets = UIEdgeInsets(top: -4.0, left: 0.0, bottom: 0.0, right: 0.0)
+            
+            favoriteButton.setTitleColor(UIColor.lightGray, for: .normal)
+            favoriteCountLabel.textColor = UIColor.lightGray
             
             self.tweet.favCount -= 1
             

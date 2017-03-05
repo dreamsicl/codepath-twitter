@@ -34,6 +34,9 @@ class Tweet: NSObject {
     
     var media: NSDictionary?
     
+    static var retweetColor = UIColor(red:0.10, green:0.81, blue:0.53, alpha:1.0)
+    static var favoriteColor = UIColor(red:0.91, green:0.11, blue:0.31, alpha:1.0)
+    
     
     // 2. deserialize json
     init(dictionary: NSDictionary) {
