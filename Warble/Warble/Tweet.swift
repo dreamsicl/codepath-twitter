@@ -28,7 +28,7 @@ class Tweet: NSObject {
     var favCountString: String!
     var favorited: Bool = false
     
-    var user: User?
+    var user: User!
     
     var retweetedStatus: NSDictionary?
     

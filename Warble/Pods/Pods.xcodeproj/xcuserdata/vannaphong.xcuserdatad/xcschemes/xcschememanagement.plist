@@ -19,6 +19,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FontAwesome.swift-FontAwesome.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FontAwesome.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Warble.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,7 +37,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>A3A5ED07E856D8D07371F346FC9D76CC</key>
+		<key>63F7272E7F398DD8BD633E47474E4C4D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>77979430716929ED71E6E262A9F9A184</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C74D47B051BF84CA30E0723F127F42AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

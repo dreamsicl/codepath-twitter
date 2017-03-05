@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FontAwesome_swift
 
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
 
@@ -18,6 +19,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var replyImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var logoutButton: UIBarButtonItem!
+    @IBOutlet weak var composeTweetButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,11 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.dataSource = self
         self.tableView.estimatedRowHeight = 64
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        // compose tweet button
+        let attributes = [NSFontAttributeName: UIFont.fontAwesome(ofSize: 18)] as [String: Any]
+        composeTweetButton.setTitleTextAttributes(attributes, for: .normal)
+        composeTweetButton.title = String.fontAwesomeIcon(name: .pencilSquareO)
         
         // get tweets from home timeline to display in table
         TwitterClient.sharedInstance.homeTimeline(max_id: "0", success: { (tweets: [Tweet]) in
@@ -196,6 +203,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let indexPath = self.tableView.indexPath(for: sender as! TweetCell)
         
         let tweet = tweets[(indexPath?.row)!]
+//        print("\(tweet)")
         vc.tweet = tweet
     }
     

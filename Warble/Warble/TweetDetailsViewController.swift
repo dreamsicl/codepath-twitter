@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import AFNetworking
 
 class TweetDetailsViewController: UIViewController {
-
-    @IBOutlet weak var profileImageView: UIView!
+    
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screennameLabel: UILabel!
     @IBOutlet weak var timeAgoLabel: UILabel!
@@ -21,13 +22,47 @@ class TweetDetailsViewController: UIViewController {
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var directMessageButton: UIButton!
     
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
     var tweet: Tweet!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // set main tweet view
+        if (tweet.retweetedStatus != nil) {
+            let rt = Tweet(dictionary: tweet.retweetedStatus!)
+            nameLabel.text = rt.user?.name
+            screennameLabel.text = "@\((rt.user?.screenname)! as String)"
+            tweetTextView.text = rt.text
+//            profileImageView.setImageWith(rt.user.profileUrl)
+            
+        } else {
+            nameLabel.text = tweet.user?.name
+            screennameLabel.text = "@\((tweet.user?.screenname)! as String)"
+            tweetTextView.text = tweet.text
+            print("\(tweet.user.profileUrl)")
+//            profileImageView.setImageWith(tweet.user.profileUrl)
+            profileImageView.setImageWith(tweet.user.profileUrl)
+        }
+        profileImageView.layer.cornerRadius = 3
+        profileImageView.clipsToBounds = true
+        
+        timeAgoLabel.text = tweet.timeAgo
+        
+        //            retweetCountLabel.text = tweet.rtCountString
+        //            favoriteCountLabel.text = tweet.favCountString
+        
+        if tweet.favorited {
+            favoriteButton.setImage(UIImage(named: "favor-icon-red") , for: .normal)
+        } else {
+            favoriteButton.setImage(UIImage(named: "favor-icon"), for: .normal)
+        }
+        
+        // back button
+//        let attributes = [NSFontAttributeName: UIFont.fontAwesome(ofSize: 20)] as [String: Any]
+//        backButton.setTitleTextAttributes(attributes, for: .normal)
+//        backButton.title = String.fontAwesomeIcon(name: .chevronLeft)
     }
 
     override func didReceiveMemoryWarning() {

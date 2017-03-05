@@ -113,7 +113,7 @@ class TwitterClient: BDBOAuth1SessionManager {
                 
                 let tweets = Tweet.tweetsFromArray(dictionaries: dictionaries)
                 
-                print("\(tweets.last?.id)")
+//                print("\(tweets.last?.id)")
                 
                 success(tweets)
                 

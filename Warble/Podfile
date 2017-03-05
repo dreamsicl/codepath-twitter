@@ -9,5 +9,6 @@ target 'Warble' do
   pod 'AFNetworking'
   pod 'BDBOAuth1Manager'
   pod 'DateToolsSwift'
+  pod 'FontAwesome.swift'
 
 end

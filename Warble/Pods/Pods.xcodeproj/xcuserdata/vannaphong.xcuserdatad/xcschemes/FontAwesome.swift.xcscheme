@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "63F7272E7F398DD8BD633E47474E4C4D"
-               BuildableName = "Pods_Warble.framework"
-               BlueprintName = "Pods-Warble"
+               BlueprintIdentifier = "C74D47B051BF84CA30E0723F127F42AD"
+               BuildableName = "FontAwesome_swift.framework"
+               BlueprintName = "FontAwesome.swift"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "63F7272E7F398DD8BD633E47474E4C4D"
-            BuildableName = "Pods_Warble.framework"
-            BlueprintName = "Pods-Warble"
+            BlueprintIdentifier = "C74D47B051BF84CA30E0723F127F42AD"
+            BuildableName = "FontAwesome_swift.framework"
+            BlueprintName = "FontAwesome.swift"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

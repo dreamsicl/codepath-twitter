@@ -12,10 +12,10 @@ class User: NSObject {
     
     static let userDidLogoutNotification = Notification.Name(rawValue: "UserDidLogout")
     
-    var name: String?
-    var screenname: String?
-    var profileUrl: URL?
-    var tagline: String? // description
+    var name: String!
+    var screenname: String!
+    var profileUrl: URL!
+    var tagline: String! // description
     
     var json: NSDictionary?
     
@@ -23,16 +23,12 @@ class User: NSObject {
         self.json = dictionary
         
         // author
-        name = dictionary["name"] as? String
-        screenname = dictionary["screen_name"] as? String
+        name = dictionary["name"] as! String
+        screenname = dictionary["screen_name"] as! String
         
-        let profileUrlString = dictionary["profile_image_url_https"] as? String
-        // unwrap if non-nil
-        if let profileUrlString = profileUrlString {
-            profileUrl = URL(string: profileUrlString)
-        }
-        
-        tagline = dictionary["description"] as? String
+        let profileUrlString = dictionary["profile_image_url_https"] as! String
+        profileUrl = URL(string: profileUrlString)
+        tagline = dictionary["description"] as! String
     
     }
     
