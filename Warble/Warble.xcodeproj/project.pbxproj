@@ -18,6 +18,7 @@
 		C5D4DF871E61D6D900C40D00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5D4DF851E61D6D900C40D00 /* Main.storyboard */; };
 		C5D4DF891E61D6D900C40D00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5D4DF881E61D6D900C40D00 /* Assets.xcassets */; };
 		C5D4DF8C1E61D6D900C40D00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5D4DF8A1E61D6D900C40D00 /* LaunchScreen.storyboard */; };
+		C5E71E281E6BA1E700D83750 /* ComposeTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E71E271E6BA1E700D83750 /* ComposeTweetViewController.swift */; };
 		C5EF9CBF1E61DA4000FA7018 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9CBE1E61DA4000FA7018 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		C5D4DF881E61D6D900C40D00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5D4DF8B1E61D6D900C40D00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5D4DF8D1E61D6D900C40D00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5E71E271E6BA1E700D83750 /* ComposeTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeTweetViewController.swift; sourceTree = "<group>"; };
 		C5EF9CBE1E61DA4000FA7018 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +68,7 @@
 				C5EF9CBE1E61DA4000FA7018 /* LoginViewController.swift */,
 				C59728EB1E620F1200021B10 /* TweetsViewController.swift */,
 				C5591B151E6684DF00E92A70 /* TweetDetailsViewController.swift */,
+				C5E71E271E6BA1E700D83750 /* ComposeTweetViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5E71E281E6BA1E700D83750 /* ComposeTweetViewController.swift in Sources */,
 				C59728EA1E6205C200021B10 /* TwitterClient.swift in Sources */,
 				C5EF9CBF1E61DA4000FA7018 /* LoginViewController.swift in Sources */,
 				C5591B161E6684DF00E92A70 /* TweetDetailsViewController.swift in Sources */,

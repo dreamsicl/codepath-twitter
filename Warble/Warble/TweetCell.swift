@@ -79,12 +79,12 @@ class TweetCell: UITableViewCell {
         
         // visually change button based on rted state
         if self.tweet.retweeted {
-            retweetButton.setImage(UIImage(named: "retweet-icon-green") , for: .normal)
+//            retweetButton.setImage(UIImage(named: "retweet-icon-green") , for: .normal)
             self.tweet.rtCount += 1
             
             
         } else {
-            retweetButton.setImage(UIImage(named: "retweet-icon"), for: .normal)
+//            retweetButton.setImage(UIImage(named: "retweet-icon"), for: .normal)
             
             self.tweet.rtCount -= 1
         }
