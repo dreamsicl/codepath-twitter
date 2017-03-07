@@ -61,6 +61,7 @@ class TweetCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
         let fontSize = CGFloat(15)
         
         replyButton.titleLabel?.font = UIFont.fontAwesome(ofSize: fontSize)
@@ -72,7 +73,9 @@ class TweetCell: UITableViewCell {
         favoriteButton.titleLabel?.font = UIFont.fontAwesome(ofSize: fontSize)
         favoriteButton.setTitle(String.fontAwesomeIcon(name: .heart), for: .normal)
         
+        
     }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

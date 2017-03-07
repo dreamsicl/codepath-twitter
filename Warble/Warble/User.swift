@@ -17,6 +17,12 @@ class User: NSObject {
     var profileUrl: URL!
     var tagline: String! // description
     
+    var favsCount: Int!
+    var followersCount: Int!
+    var followingCount: Int!
+    
+    var bannerUrl: URL?
+    
     var json: NSDictionary?
     
     init(dictionary: NSDictionary) {
@@ -29,6 +35,18 @@ class User: NSObject {
         let profileUrlString = dictionary["profile_image_url_https"] as! String
         profileUrl = URL(string: profileUrlString)
         tagline = dictionary["description"] as! String
+        
+        favsCount = dictionary["favourites_count"] as! Int
+        followersCount = dictionary["followers_count"] as! Int
+        followingCount = dictionary["friends_count"] as! Int
+        
+        let bannerString = dictionary["profile_banner_url"] as? String ///mobile_retina"
+        if let bannerString = bannerString {
+            bannerUrl = URL(string: bannerString)
+        }
+        
+        
+//        print("\(dictionary)")
     
     }
     

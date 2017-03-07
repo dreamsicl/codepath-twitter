@@ -1,5 +1,5 @@
 //
-//  TweetsViewController.swift
+//  HomeViewController.swift
 //  Warble
 //
 //  Created by Vanna Phong on 2/25/17.
@@ -9,9 +9,11 @@
 import UIKit
 import FontAwesome_swift
 
-class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
 
     var tweets: [Tweet]!
+    
+    var tappedIndexPath: IndexPath?
     
     var isMoreDataLoading = false
     var loadingMoreView: InfiniteScrollActivityView?
@@ -63,7 +65,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.insertSubview(refreshControl, at: 0)
         self.tableView.sendSubview(toBack: refreshControl)
         
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,7 +93,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.tweet = tweets[indexPath.row]
         
-        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedProfilePic))
+        cell.profileImageView.addGestureRecognizer(tap)
         
         return cell
     }
@@ -207,10 +210,24 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let tweet = tweets[(indexPath?.row)!]
             //        print("\(tweet)")
             vc.tweet = tweet
-        } else if (segue.identifier == "composeTweet") {
-//            let vc = segue.identifier as! ComposeTweetViewController
+        } else if (segue.identifier == "profileView") {
+            
+            let vc = segue.destination as! ProfileViewController
+            let tweet = tweets[(tappedIndexPath?.row)!]
+            print("\(tweet)")
+            vc.user = tweet.user
             
         }
+    }
+    
+    
+    func tappedProfilePic(recognizer: UITapGestureRecognizer) {
+        
+        let tapLocation = recognizer.location(in: self.tableView)
+        self.tappedIndexPath = self.tableView.indexPathForRow(at: tapLocation)
+        
+        self.performSegue(withIdentifier: "profileView", sender: self)
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

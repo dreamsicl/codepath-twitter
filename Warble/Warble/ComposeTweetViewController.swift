@@ -10,10 +10,32 @@ import UIKit
 
 class ComposeTweetViewController: UIViewController {
 
+    
+    @IBOutlet weak var screennameLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var tweetField: UITextField!
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    let maxLength = 140
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // customize navigation bar
+        let tweetButton = UIBarButtonItem()
+        tweetButton.title = "Tweet"
+        tweetButton.action = #selector(onTweet)
+        self.navigationItem.rightBarButtonItem = tweetButton
+        
+        profileImageView.setImageWith((User.currentUser?.profileUrl)!)
+        nameLabel.text = User.currentUser?.name
+        screennameLabel.text = "@\(User.currentUser?.screenname)"
+        
+        
+        print("\(tweetField.text)")
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +43,39 @@ class ComposeTweetViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func onTweet() {
+        
+        let alertController = UIAlertController()
+        alertController.title = "Error"
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction) in
+        }
+        alertController.addAction(OKAction)
+        
+        if (tweetField.text?.characters.count)! > maxLength {
+            // error
+            alertController.message = "Tweet is too long."
+            self.present(alertController, animated: true, completion: {
+            })
+        } else {
+            TwitterClient.sharedInstance.tweet(tweet: tweetField.text!, success: {
+                self.performSegue(withIdentifier: "toHomeTimeline", sender: self)
+            }, failure: { (error: Error) in
+                
+                
+                alertController.message = "\(error.localizedDescription)"
+                self.present(alertController, animated: true, completion: {
+                })
+            })
+            
+        }
+    }
+    
 
+    @IBAction func onTweetChange(_ sender: Any) {
+//        if tweetField.text?.characters.count > maxLength {
+//            tweetField
+//        }
+    }
     /*
     // MARK: - Navigation
 

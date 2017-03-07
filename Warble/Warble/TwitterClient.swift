@@ -97,6 +97,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     func homeTimeline(max_id: String, success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
         
+        // set endpoint - which "starting" tweet to fetch
         var endpoint = ""
         if max_id == "0" {
             endpoint = "/1.1/statuses/home_timeline.json"
@@ -104,16 +105,13 @@ class TwitterClient: BDBOAuth1SessionManager {
             endpoint = "/1.1/statuses/home_timeline.json?max_id=\(max_id)"
         }
         
-//        print(endpoint)
-        
+        // http get
         get(endpoint, parameters: nil, progress: nil,
             success: { (task: URLSessionDataTask, response: Any?) in
                 
                 let dictionaries = response as! [NSDictionary]
                 
                 let tweets = Tweet.tweetsFromArray(dictionaries: dictionaries)
-                
-//                print("\(tweets.last?.id)")
                 
                 success(tweets)
                 
@@ -124,13 +122,30 @@ class TwitterClient: BDBOAuth1SessionManager {
         
     }
     
+    func tweet(tweet: String, success: @escaping () -> (), failure: @escaping (Error) -> ())  {
+        let endpoint = "/1.1/statuses/update.json"
+        
+        post(endpoint, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            print("tweet(): success")
+            success()
+            
+        }) { (task: URLSessionDataTask?, error: Error) in
+            
+            print("tweet(): ERROR: \(error)")
+            failure(error)
+        }
+    }
+    
     
     // MARK: - Actions on Tweets
     
     func retweetStatus(retweeting: Bool, id: String) {
         
+        // set endpoint
         let endpoint = retweeting ? "retweet" : "unretweet"
         
+        // http post
         post("1.1/statuses/\(endpoint)/\(id).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             print("retweetStatus(): \(endpoint): success")
         },
@@ -143,8 +158,10 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     func favoriteStatus(favoriting: Bool, id: String) {
         
+        // set endpoint
         let endpoint = favoriting ? "create" : "destroy"
         
+        // http post
         post("1.1/favorites/\(endpoint).json?id=\(id)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             print("favoriteStatus(): \(endpoint): success")
         },
@@ -152,6 +169,41 @@ class TwitterClient: BDBOAuth1SessionManager {
                 
                 print("favoriteStatus(): ERROR: \(error)")
         })
+    }
+    
+    func userInfo(screenname: String, success: @escaping (User) -> (), failure: @escaping (Error) -> ()) {
+        let endpoint = "/1.1/users/show.json?screen_name=\(screenname)"
+        
+        get(endpoint, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            let dictionary = response as! NSDictionary
+            
+            let user = User(dictionary: dictionary)
+            
+            success(user)
+            
+            
+        }) { (task: URLSessionDataTask?, error: Error) in
+            print("userInfo(): ERROR: \(error)")
+        }
+    }
+    
+    func userTimeline(screenname: String, success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+        let endpoint = "/1.1/statuses/user_timeline.json?screen_name=\(screenname)"
+        
+        get(endpoint, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            let dictionaries = response as! [NSDictionary]
+            
+            let tweets = Tweet.tweetsFromArray(dictionaries: dictionaries)
+            
+            success(tweets)
+            
+            
+        }) { (task: URLSessionDataTask?, error: Error) in
+            
+            print("userTimeline(): ERROR: \(error)")
+        }
     }
     
     
