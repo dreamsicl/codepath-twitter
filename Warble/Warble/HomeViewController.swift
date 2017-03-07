@@ -93,8 +93,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.tweet = tweets[indexPath.row]
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedProfilePic))
-        cell.profileImageView.addGestureRecognizer(tap)
+        let tapImage = UITapGestureRecognizer(target: self, action: #selector(tappedProfilePic))
+        cell.profileImageView.addGestureRecognizer(tapImage)
+        let tapReply = UITapGestureRecognizer(target: self, action: #selector(tappedReplyButton))
+        cell.replyButton.addGestureRecognizer(tapReply)
         
         return cell
     }
@@ -224,7 +226,26 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 vc.user = tweet.user
             }
             
+        } else if (segue.identifier == "cellReplyTo") {
+            let vc = segue.destination as! ComposeTweetViewController
+            let tweet = tweets[(self.tappedIndexPath?.row)!]
+            
+            if tweet.retweeted {
+                let rt = Tweet(dictionary: tweet.retweetedStatus!)
+                vc.replyTo = "@\(rt.user.screenname as String) @\(tweet.user.screenname as String)"
+            } else {
+                vc.replyTo = "@\(tweet.user.screenname as String)"
+            }
+            
         }
+    }
+    
+    func tappedReplyButton(recognizer: UITapGestureRecognizer) {
+        
+        let tapLocation = recognizer.location(in: self.tableView)
+        self.tappedIndexPath = self.tableView.indexPathForRow(at: tapLocation)
+        
+        self.performSegue(withIdentifier: "cellReplyTo", sender: self)
     }
     
     

@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     var user: User!
     var tweets: [Tweet]!
+    var tappedIndexPath: IndexPath?
     
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -75,8 +76,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as! TweetCell
         
         cell.tweet = tweets[indexPath.row]
-    
+        
+        let tapReply = UITapGestureRecognizer(target: self, action: #selector(tappedReplyButton))
+        cell.replyButton.addGestureRecognizer(tapReply)
+        
         return cell
+        
+    }
+    
+    func tappedReplyButton(recognizer: UITapGestureRecognizer) {
+        let tapLocation = recognizer.location(in: self.tableView)
+        self.tappedIndexPath = self.tableView.indexPathForRow(at: tapLocation)
+            
+        self.performSegue(withIdentifier: "profileReply", sender: self)
         
     }
     
@@ -90,14 +102,23 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        let vc = segue.destination as! ComposeTweetViewController
+        let tweet = tweets[(self.tappedIndexPath?.row)!]
+        
+        if tweet.retweeted {
+            let rt = Tweet(dictionary: tweet.retweetedStatus!)
+            vc.replyTo = "@\(rt.user.screenname as String) @\(tweet.user.screenname as String)"
+        } else {
+            vc.replyTo = "@\(tweet.user.screenname as String)"
+        }
     }
-    */
+ 
 
 }

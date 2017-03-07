@@ -18,6 +18,7 @@ class ComposeTweetViewController: UIViewController {
     
     let maxLength = 140
     
+    var replyTo: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,9 @@ class ComposeTweetViewController: UIViewController {
         nameLabel.text = User.currentUser?.name
         screennameLabel.text = "@\((User.currentUser?.screenname)! as String)"
         
-        
+        if let reply = self.replyTo {
+           tweetField.text = reply
+        }
         
     }
 
@@ -74,11 +77,6 @@ class ComposeTweetViewController: UIViewController {
     }
     
 
-    @IBAction func onTweetChange(_ sender: Any) {
-//        if tweetField.text?.characters.count > maxLength {
-//            tweetField
-//        }
-    }
     /*
     // MARK: - Navigation
 
