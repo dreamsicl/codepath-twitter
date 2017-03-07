@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // set initial view to Tweets
             let vc = storyboard.instantiateViewController(withIdentifier: "tweetsNavigationController")
             window?.rootViewController = vc
+            UIApplication.shared.statusBarStyle = .lightContent
             
             
         } else {

@@ -30,12 +30,15 @@ class ComposeTweetViewController: UIViewController {
         tweetButton.action = #selector(onTweet)
         self.navigationItem.rightBarButtonItem = tweetButton
         
-        profileImageView.setImageWith((User.currentUser?.profileUrl)!)
+        profileImageView.setImageWith((User.currentUser?.profilePic)!)
+        profileImageView.layer.cornerRadius = 5
+        profileImageView.clipsToBounds = true
+        
         nameLabel.text = User.currentUser?.name
-        screennameLabel.text = "@\(User.currentUser?.screenname)"
+        screennameLabel.text = "@\((User.currentUser?.screenname)! as String)"
         
         
-        print("\(tweetField.text)")
+        
     }
 
     override func didReceiveMemoryWarning() {

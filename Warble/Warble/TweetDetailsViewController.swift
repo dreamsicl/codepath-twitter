@@ -19,7 +19,11 @@ class TweetDetailsViewController: UIViewController {
     
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
+    
+    @IBOutlet weak var timestampLabel: UILabel!
     
     var tweet: Tweet!
     
@@ -32,20 +36,26 @@ class TweetDetailsViewController: UIViewController {
             nameLabel.text = rt.user?.name
             screennameLabel.text = "@\((rt.user?.screenname)! as String)"
             tweetTextView.text = rt.text
-            profileImageView.setImageWith(rt.user.profileUrl)
+            profileImageView.setImageWith(rt.user.profilePic)
             
         } else {
             nameLabel.text = tweet.user?.name
             screennameLabel.text = "@\((tweet.user?.screenname)! as String)"
             tweetTextView.text = tweet.text
-            profileImageView.setImageWith(tweet.user.profileUrl)
+            profileImageView.setImageWith(tweet.user.profilePic)
         }
-        profileImageView.layer.cornerRadius = 3
+        profileImageView.layer.cornerRadius = 5
         profileImageView.clipsToBounds = true
         
         timeAgoLabel.text = tweet.timeAgo
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EE, MMM d yyyy a"
+        timestampLabel.text = formatter.string(from: tweet.timestamp!)
         
+        
+        
+        // interaction view
         let fontSize = CGFloat(15)
         
         replyButton.titleLabel?.font = UIFont.fontAwesome(ofSize: fontSize)
@@ -53,9 +63,11 @@ class TweetDetailsViewController: UIViewController {
         
         retweetButton.titleLabel?.font = UIFont.fontAwesome(ofSize: fontSize)
         retweetButton.setTitle(String.fontAwesomeIcon(name: .retweet), for: .normal)
+        retweetCountLabel.text = tweet.rtCountString
         
         favoriteButton.titleLabel?.font = UIFont.fontAwesome(ofSize: fontSize)
         favoriteButton.setTitle(String.fontAwesomeIcon(name: .heart), for: .normal)
+        favoriteCountLabel.text = tweet.favCountString
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,19 +86,20 @@ class TweetDetailsViewController: UIViewController {
         // visually change button based on rted state
         if self.tweet.retweeted {
             retweetButton.setTitleColor(Tweet.retweetColor, for: .normal)
-//            retweetCountLabel.textColor = Tweet.retweetColor
+            retweetCountLabel.textColor = Tweet.retweetColor
             self.tweet.rtCount += 1
             
             
         } else {
-            retweetButton.setTitleColor(UIColor.lightGray, for: .normal)
-//            retweetCountLabel.textColor = UIColor.lightGray
+        
+            retweetButton.setTitleColor(UIColor.darkGray, for: .normal)
+            retweetCountLabel.textColor = UIColor.darkGray
             self.tweet.rtCount -= 1
         }
         
         // update count string
         self.tweet.rtCountString = (self.tweet.rtCount > 0) ? "\(self.tweet.rtCount)" : ""
-//        self.retweetCountLabel.text = self.tweet.rtCountString
+        self.retweetCountLabel.text = self.tweet.rtCountString
         
         // TODO: post to Twitter
         if let id = self.tweet.id {
@@ -102,14 +115,14 @@ class TweetDetailsViewController: UIViewController {
         if self.tweet.favorited {
             
             favoriteButton.setTitleColor(Tweet.favoriteColor, for: .normal)
-//            favoriteCountLabel.textColor = Tweet.favoriteColor
+            favoriteCountLabel.textColor = Tweet.favoriteColor
             
             self.tweet.favCount += 1
             
         } else {
             
-            favoriteButton.setTitleColor(UIColor.lightGray, for: .normal)
-//            favoriteCountLabel.textColor = UIColor.lightGray
+            favoriteButton.setTitleColor(UIColor.darkGray, for: .normal)
+            favoriteCountLabel.textColor = UIColor.darkGray
             
             self.tweet.favCount -= 1
             
@@ -117,7 +130,7 @@ class TweetDetailsViewController: UIViewController {
         
         
         self.tweet.favCountString = (self.tweet.favCount > 0) ? "\(self.tweet.favCount)" : ""
-//        self.favoriteCountLabel.text = self.tweet.favCountString
+        self.favoriteCountLabel.text = self.tweet.favCountString
         
         // TODO: post to Twitter
         if let id = self.tweet.id {

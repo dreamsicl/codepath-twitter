@@ -33,15 +33,15 @@ class TweetCell: UITableViewCell {
                 nameLabel.text = rt.user?.name
                 screennameLabel.text = "@\((rt.user?.screenname)! as String)"
                 tweetTextLabel.text = rt.text
-                profileImageView.setImageWith((rt.user?.profileUrl)!)
+                profileImageView.setImageWith(rt.user.profilePicBig)
                 
             } else {
                 nameLabel.text = tweet.user?.name
                 screennameLabel.text = "@\((tweet.user?.screenname)! as String)"
                 tweetTextLabel.text = tweet.text
-                profileImageView.setImageWith((tweet.user?.profileUrl)!)
+                profileImageView.setImageWith(tweet.user.profilePicBig)
             }
-            profileImageView.layer.cornerRadius = 3
+            profileImageView.layer.cornerRadius = 5
             profileImageView.clipsToBounds = true
             
             timeAgoLabel.text = tweet.timeAgo

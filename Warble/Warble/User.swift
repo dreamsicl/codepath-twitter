@@ -14,12 +14,14 @@ class User: NSObject {
     
     var name: String!
     var screenname: String!
-    var profileUrl: URL!
+    var profilePic: URL!
+    var profilePicBig: URL!
     var tagline: String! // description
     
     var favsCount: Int!
     var followersCount: Int!
     var followingCount: Int!
+    var statusesCount: Int!
     
     var bannerUrl: URL?
     
@@ -33,12 +35,16 @@ class User: NSObject {
         screenname = dictionary["screen_name"] as! String
         
         let profileUrlString = dictionary["profile_image_url_https"] as! String
-        profileUrl = URL(string: profileUrlString)
+        let profilePicBigString = profileUrlString.replacingOccurrences(of: "normal", with: "bigger")
+        profilePic = URL(string: profileUrlString)
+        profilePicBig = URL(string: profilePicBigString)
+        
         tagline = dictionary["description"] as! String
         
         favsCount = dictionary["favourites_count"] as! Int
         followersCount = dictionary["followers_count"] as! Int
         followingCount = dictionary["friends_count"] as! Int
+        statusesCount = dictionary["statuses_count"] as! Int
         
         let bannerString = dictionary["profile_banner_url"] as? String ///mobile_retina"
         if let bannerString = bannerString {

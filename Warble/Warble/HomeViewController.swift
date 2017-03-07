@@ -208,14 +208,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let indexPath = self.tableView.indexPath(for: sender as! TweetCell)
             
             let tweet = tweets[(indexPath?.row)!]
-            //        print("\(tweet)")
             vc.tweet = tweet
+            
+            
         } else if (segue.identifier == "profileView") {
             
             let vc = segue.destination as! ProfileViewController
             let tweet = tweets[(tappedIndexPath?.row)!]
-            print("\(tweet)")
-            vc.user = tweet.user
+            
+            if tweet.retweeted {
+                // open retweeted user, not the user we're following
+                let rt = Tweet(dictionary: tweet.retweetedStatus!)
+                vc.user = rt.user
+            } else {
+                vc.user = tweet.user
+            }
             
         }
     }

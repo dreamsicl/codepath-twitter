@@ -171,22 +171,6 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    func userInfo(screenname: String, success: @escaping (User) -> (), failure: @escaping (Error) -> ()) {
-        let endpoint = "/1.1/users/show.json?screen_name=\(screenname)"
-        
-        get(endpoint, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-            
-            let dictionary = response as! NSDictionary
-            
-            let user = User(dictionary: dictionary)
-            
-            success(user)
-            
-            
-        }) { (task: URLSessionDataTask?, error: Error) in
-            print("userInfo(): ERROR: \(error)")
-        }
-    }
     
     func userTimeline(screenname: String, success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
         let endpoint = "/1.1/statuses/user_timeline.json?screen_name=\(screenname)"

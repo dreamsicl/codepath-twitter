@@ -20,11 +20,7 @@ class Tweet: NSObject {
     var rtCount: Int = 0
     var rtCountString: String!
     var retweeted: Bool = false
-    var favCount: Int = 0 {
-        didSet {
-            
-        }
-    }
+    var favCount: Int = 0
     var favCountString: String!
     var favorited: Bool = false
     
